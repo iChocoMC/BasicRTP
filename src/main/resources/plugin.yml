@@ -1,0 +1,9 @@
+name: BasicRTP
+description: A Basic random teleport plugin
+author: iChocoMC_
+main: ichoco.basicrtp.BasicRtpMain
+version: 1.0
+
+commands:
+  rtp:
+    description: "Telepor to random location"
