@@ -19,9 +19,9 @@ public class TeleportUtil {
     static String worldblacklist = config.getString("blacklist-worlds.message");
 
     //Check if worldname equals to blacklist
-    public static boolean WorldBlackList(World world){
+    public static boolean WorldBlackList(String world){
         for(String worlds : config.getStringList("blacklist-worlds")){
-            if(world.getName().equalsIgnoreCase(worlds)){
+            if(world.equalsIgnoreCase(worlds)){
                 return true;
             }
         }
@@ -33,7 +33,7 @@ public class TeleportUtil {
         World world = player.getWorld();
 
         if (blacklist){
-            if (WorldBlackList(world)){
+            if (WorldBlackList(world.getName())){
                 player.sendMessage(MessageUtil.translate(worldblacklist));
             }
         }
@@ -62,7 +62,7 @@ public class TeleportUtil {
         World world = player.getWorld();
 
         if (blacklist){
-            if (WorldBlackList(world)){
+            if (WorldBlackList(world.getName())){
                 player.sendMessage(MessageUtil.translate(worldblacklist));
             }
         }
