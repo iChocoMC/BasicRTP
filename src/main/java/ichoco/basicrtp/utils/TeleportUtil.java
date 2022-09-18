@@ -3,7 +3,8 @@ package ichoco.basicrtp.utils;
 import java.util.Random;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import ichoco.basicrtp.BasicRtpMain;
@@ -11,22 +12,40 @@ import ichoco.basicrtp.BasicRtpMain;
 public class TeleportUtil {
     
     static Random random = new Random();
-    static int maxRadius = BasicRtpMain.getInstance().getConfig().getInt("max-radius");
+    static FileConfiguration config = BasicRtpMain.getInstance().getConfig();
     
+    static int maxRadius = config.getInt("max-radius");
+    static boolean blacklist = config.getBoolean("blacklist-worlds.enable");
+    static String worldblacklist = config.getString("blacklist-worlds.message");
+
+    //Check if worldname equals to blacklist
+    public static boolean WorldBlackList(World world){
+        for(String worlds : config.getStringList("blacklist-worlds")){
+            if(world.getName().equalsIgnoreCase(worlds)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void teleportPlayer(Player player){
-        Location
-            loc = player.getLocation(),
-            newloc;
+        Location newloc;
+        World world = player.getWorld();
+
+        if (blacklist){
+            if (WorldBlackList(world)){
+                player.sendMessage(MessageUtil.translate(worldblacklist));
+            }
+        }
 
         int 
             x = random.nextInt(maxRadius),
             z = random.nextInt(maxRadius),
             y = 5;
 
-
-        while(y > 0){
-            newloc = new Location(loc.getWorld(), x, y , z);
-            if (newloc.getBlock().getType() == Material.AIR){
+        while(y < 255){
+            newloc = new Location(world, x, y , z);
+            if (newloc.getBlock().isEmpty()){
                 player.teleport(newloc);
                 break;
             }
@@ -39,9 +58,14 @@ public class TeleportUtil {
      * activate this option.
      */
     public static void teleportPlayerNegative(Player player){
-        Location
-            loc = player.getLocation(),
-            newloc;
+        Location newloc;
+        World world = player.getWorld();
+
+        if (blacklist){
+            if (WorldBlackList(world)){
+                player.sendMessage(MessageUtil.translate(worldblacklist));
+            }
+        }
 
         int 
             x = random.nextInt(maxRadius),
@@ -59,8 +83,8 @@ public class TeleportUtil {
         }
 
         while(y > 0){
-            newloc = new Location(loc.getWorld(), x, y , z);
-            if (newloc.getBlock().getType() == Material.AIR){
+            newloc = new Location(world, x, y , z);
+            if (newloc.getBlock().isEmpty()){
                 player.teleport(newloc);
                 break;
             }

@@ -13,7 +13,6 @@ public class RTPCommandNegative implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player)sender;
         TeleportUtil.teleportPlayerNegative(player);
-
-        return true;
+        return false;
     }    
 }

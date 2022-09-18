@@ -6,3 +6,9 @@ activate-negative-cords: true
 # 2523 90 3000
 
 max-radius: 3000
+
+blacklist-worlds:
+  - ExampleWorld
+  - ExampleWorld2
+  enable: false
+  message: "&fThe world is blacklist"

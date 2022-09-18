@@ -1,5 +1,6 @@
 package ichoco.basicrtp.commands;
 
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,6 @@ public class RTPCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player)sender;
         TeleportUtil.teleportPlayer(player);
-
-        return true;
+        return false;
     }    
 }
