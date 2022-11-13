@@ -1,14 +1,26 @@
-activate-negative-cords: true
+support-negative-cords: true
 # Allow negative cords, example:
 # -2523 90 -3000
 #
 # If this option is in false, transform the cords to positive:
 # 2523 90 3000
+#
 
 max-radius: 3000
 
 blacklist-worlds:
-  - ExampleWorld
-  - ExampleWorld2
   enable: false
   message: "&fThe world is blacklist"
+
+list-blacklist-worlds:
+  - "ExampleWorld1"
+  - "ExampleWorld2"
+
+teleport-message:
+  - " "
+  - " &e&lTELEPORT TO NEW LOCATION:"
+  - " "
+  - " %location%"
+  - " "
+#%location%:
+# X,Y and Z
